@@ -1,5 +1,4 @@
 // This file is intentionally minimal as the Techify landing page
-// is a static marketing site with no backend data operations.
-// All interactions (payment, support) use external links (UPI, WhatsApp).
-
+// uses feature-specific hooks (useLivePurchases, useRecordPurchaseEvent)
+// for backend interactions instead of a centralized queries file.
 export {};

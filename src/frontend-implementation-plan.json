@@ -1,120 +1,75 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Techify Canva Pro Upgrade Landing Page (Go-live + Phone & UPI) — Frontend",
+  "title": "Sync scarcity badge with simulated activity, show named “paid” events, and prefill WhatsApp message for screenshot action",
   "requirements": [
     {
-      "id": "REQ-1",
-      "summary": "Recreate the provided single-page Techify landing page as the main React (TypeScript) page with matching sections and Tailwind styling.",
+      "id": "REQ-19",
+      "summary": "Make the hero scarcity badge start at “Last 30 slots available” and dynamically decrement based on simulated purchase increments (client-side only).",
       "acceptanceCriteria": [
-        "Visually matches the provided HTML page structure and styling using Tailwind classes in React components.",
-        "All sections from the provided HTML exist on the rendered page and are responsive (mobile + desktop).",
-        "No external Tailwind CDN script is required at runtime; styling is handled via the project’s Tailwind build setup."
+        "On initial page load, the badge renders “Last 30 slots available”.",
+        "As the simulated live purchases total increases, the badge’s slots number decreases accordingly (remaining = 30 - simulated increments, clamped at 0).",
+        "The slots value does not increase over time.",
+        "All badge text remains in English."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/TechifyLandingPage.tsx",
-          "operation": "create",
-          "description": "Implement the full landing page as a single React (TypeScript) page containing all required sections (navbar, hero/pricing card + primary CTA, trusted-by band, features grid, FAQ, mobile sticky CTA, footer) using Tailwind utility classes to match the supplied HTML layout and responsive behavior. Use shadcn-ui components where appropriate (e.g., Accordion for FAQ, Button for CTAs) to accelerate consistent UI primitives; verify the component's usage instructions before implementing."
+          "path": "frontend/src/hooks/useSimulatedLivePurchases.ts",
+          "operation": "modify",
+          "description": "Extend the client-only simulated purchases hook to track the initial total on mount and expose a monotonic simulated increment count (e.g., totalDeltaSinceMount) that can drive the “remaining slots” calculation without introducing any backend calls."
         },
         {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/src/pages/TechifyLandingPage.tsx",
           "operation": "modify",
-          "description": "Wire the landing page as the default rendered view (single-page public landing) by rendering TechifyLandingPage as the app’s main content (no login gating). Ensure navigation links (if any) are in-page anchors and do not require additional routes."
+          "description": "Update the hero scarcity badge to display “Last 30 slots available” on first render and compute remaining slots from the simulated increment count (clamp at 0). Keep all user-facing text in English. Continue using existing shadcn-ui UI primitives already imported on this page (e.g., Button/Dialog/Accordion); verify the component's usage instructions before implementing."
         }
       ]
     },
     {
-      "id": "REQ-2",
-      "summary": "Update all contact details to phone number 9622655116, including WhatsApp wa.me link and a visible clickable tel: link.",
+      "id": "REQ-20",
+      "summary": "Update the simulated Recent Activity feed to show realistic buyer names with a “paid” action per event (client-only).",
       "acceptanceCriteria": [
-        "WhatsApp Support button/link points to a wa.me URL using phone number 9622655116 (with appropriate country code formatting).",
-        "Phone number 9622655116 is visibly displayed on the page and clicking it initiates a call via a tel: link on supported devices.",
-        "No remaining placeholder phone numbers (e.g., 919999999999) appear in the UI or links."
+        "Recent activity rows display a name and the word “paid” (e.g., “Riya paid”).",
+        "No recent activity row displays “Someone purchased”.",
+        "Simulated activity remains fully client-side (no backend reads/writes introduced).",
+        "All user-facing text remains in English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useSimulatedLivePurchases.ts",
+          "operation": "modify",
+          "description": "Enhance the simulated activity generator so each recent event includes a realistic buyer name and an explicit “paid” action label. Ensure both the initial seeded recent activity and the periodic additions include names, and keep all strings in English."
+        },
+        {
+          "path": "frontend/src/pages/TechifyLandingPage.tsx",
+          "operation": "modify",
+          "description": "Replace the hardcoded “Someone purchased” label in Recent Activity rows with the per-event generated buyer name plus the word “paid” (e.g., “Riya paid”). Continue using existing shadcn-ui UI primitives already imported on this page; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-21",
+      "summary": "On “Send screenshot” action, open WhatsApp to the support number with a prefilled English payment confirmation message, without breaking the existing Support link.",
+      "acceptanceCriteria": [
+        "Clicking the “Send screenshot” action opens a https://wa.me/ link to +919622655116 with a prefilled message indicating payment for Canva Pro.",
+        "The prefilled message is in English and clearly communicates payment (e.g., “I have paid for Canva Pro”).",
+        "This change does not break the existing general WhatsApp “Support” link behavior."
       ],
       "file_operations": [
         {
           "path": "frontend/src/constants/techify.ts",
-          "operation": "create",
-          "description": "Centralize public constants for the landing page (phone number 9622655116, WhatsApp number in E.164 format for wa.me, and display formatting) to avoid scattered placeholders and make it easy to validate no old numbers remain."
-        },
-        {
-          "path": "frontend/src/pages/TechifyLandingPage.tsx",
           "operation": "modify",
-          "description": "Update WhatsApp Support link to wa.me using the correct number (with country code formatting) and add at least one visible contact area (e.g., footer/support block) that displays 9622655116 as a clickable tel: link. Ensure no placeholder numbers remain in UI strings."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Add UPI ID 9622655116@ybl to the page and connect both CTAs to a working UPI deep link (remove YOUR_PAYMENT_LINK).",
-      "acceptanceCriteria": [
-        "UPI ID 9622655116@ybl is visible on the page (e.g., near pricing/CTA) as selectable/copyable text.",
-        "Both CTAs no longer use \"YOUR_PAYMENT_LINK\" and instead open a UPI payment deep link that includes pa=9622655116@ybl.",
-        "No occurrences of the placeholder \"YOUR_PAYMENT_LINK\" remain in the codebase/UI."
-      ],
-      "file_operations": [
+          "description": "Add a dedicated WhatsApp message constant for the payment screenshot flow (English), distinct from the existing default support message, to avoid changing current Support link behavior."
+        },
         {
           "path": "frontend/src/utils/upi.ts",
-          "operation": "create",
-          "description": "Add a small utility to generate a UPI payment deep link derived from the configured UPI ID (must include pa=9622655116@ybl) and any safe, user-friendly optional fields (e.g., payee name) without introducing external payment gateway dependencies."
-        },
-        {
-          "path": "frontend/src/constants/techify.ts",
           "operation": "modify",
-          "description": "Add UPI ID constant (9622655116@ybl) and any related display labels so the landing page can render it consistently and the UPI deep link builder can consume it."
+          "description": "Add a separate WhatsApp link generator for the “Send screenshot” flow that targets TECHIFY_CONSTANTS.phone.e164 (+919622655116) and uses the new prefilled payment-confirmation message, while keeping generateWhatsAppLink() behavior unchanged."
         },
         {
           "path": "frontend/src/pages/TechifyLandingPage.tsx",
           "operation": "modify",
-          "description": "Render the UPI ID 9622655116@ybl visibly near pricing/CTA (plain selectable text) and update both CTAs (desktop “GET INSTANT ACCESS” and mobile sticky CTA) to open the generated UPI deep link instead of the placeholder YOUR_PAYMENT_LINK. If using shadcn-ui Button/Link styling for CTAs, verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "summary": "Make the frontend production-ready as a single-page public landing page and add brief deployment notes (English) for standard IC go-live workflow.",
-      "acceptanceCriteria": [
-        "A production build completes without errors.",
-        "The deployed app loads directly to the landing page as the default route.",
-        "Project includes brief English instructions describing the steps to deploy/go-live on the Internet Computer (using the project’s standard tooling)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Ensure the landing page is the default render path with no authentication requirement and no route preconditions (single-page public landing behavior)."
-        },
-        {
-          "path": "frontend/DEPLOYMENT.md",
-          "operation": "create",
-          "description": "Add a short English deployment note describing the project’s standard workflow to deploy/go-live on the Internet Computer (e.g., build steps, running the standard deploy command, and what to verify after deploy). Keep it concise and aligned with repo tooling."
-        }
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "summary": "Apply a coherent modern tech/marketing theme with consistent typography/spacing/button styles; keep all user-facing text in English.",
-      "acceptanceCriteria": [
-        "Typography and spacing are consistent across all sections (headings, body text, cards, and CTAs).",
-        "Buttons/links have consistent hover/focus styles and accessible contrast.",
-        "All user-visible text is English."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Adjust global typography primitives and base element styling (via Tailwind layers/CSS variables already used by the project) to enforce consistent font sizing, spacing rhythm, and accessible focus states across the landing page without adding runtime Tailwind CDN usage."
-        },
-        {
-          "path": "frontend/tailwind.config.js",
-          "operation": "modify",
-          "description": "Refine Tailwind theme tokens as needed (e.g., brand-appropriate colors/radii/shadows) to match the provided design aesthetic consistently across sections while preserving the existing Tailwind build setup."
-        },
-        {
-          "path": "frontend/src/pages/TechifyLandingPage.tsx",
-          "operation": "modify",
-          "description": "Normalize section spacing, heading hierarchy, and CTA/button styles across the page (including hover/focus/disabled states) and ensure all user-facing copy is English. If using shadcn-ui Button/Accordion to standardize interactions, verify the component's usage instructions before implementing."
+          "description": "Wire the existing “Send screenshot” (or equivalent payment confirmation) UI action to use the new WhatsApp paid-message link (https://wa.me/... with encoded text). Ensure the top navigation Support button continues to use the existing generateWhatsAppLink() behavior. Continue using existing shadcn-ui UI primitives already imported on this page; verify the component's usage instructions before implementing."
         }
       ]
     }

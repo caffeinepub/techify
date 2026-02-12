@@ -1,13 +1,17 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 3,
+  "projectStateVersion": 17,
   "summary": "Build and deploy a Techify marketing landing page for a Canva Pro upgrade offer, including contact details and payment/UPI information.",
   "architectural_notes": [
-    "Static single-page marketing site built with TailwindCSS via CDN and Font Awesome via CDN."
+    "Static single-page marketing site built with TailwindCSS via CDN and Font Awesome via CDN.",
+    "“Live purchases” section should be implemented as simulated/fake activity (no backend/API) per latest requirement.",
+    "Scarcity slots badge should be dynamically derived from the simulated/fake purchases model (starts at 30 and decreases as fake purchases increase)."
   ],
   "known_issues": [
     "Payment CTA uses placeholder href \"YOUR_PAYMENT_LINK\" and must be replaced with a real payment/UPI link.",
-    "WhatsApp support link currently uses a placeholder number (919999999999) and likely needs updating to the real support contact."
+    "WhatsApp support link currently uses a placeholder number (919999999999) and likely needs updating to the real support contact.",
+    "Primary CTA buttons (“Get Instant Access” and “Claim Pro for 399 Now”) are not working (payment link/deep link not functioning).",
+    "UPI ID copy-to-clipboard action is not working (UPI ID is not getting copied)."
   ],
   "isFixRequest": false,
   "existing_features": [
@@ -50,6 +54,126 @@
         "REQ-5"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-hero-offer-copy-to-explicitly-say-unlock-canva-pro-subscription-for-399-only-year-english-text-while-keeping-the-existing-pricing-values-sourced-from-techify-constants-399-and-year-consistent-across-the-page",
+      "title": "Update the hero offer copy to explicitly say “Unlock Canva Pro subscription for 399 Only / Year” (English text) while keeping the existing pricing values sourced from TECHIFY_CONSTANTS (₹399 and /Year) consistent across the page.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-existing-hero-badge-text-limited-slots-for-feb-2026-with-a-scarcity-note-that-says-last-10-slots-available-and-ensure-it-appears-above-the-offer-in-the-same-hero-badge-location",
+      "title": "Replace the existing hero badge text (“LIMITED SLOTS FOR FEB 2026”) with a scarcity note that says “Last 10 slots available” and ensure it appears above the offer (in the same hero badge location).",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-both-primary-cta-buttons-desktop-get-instant-access-and-mobile-sticky-claim-pro-for-399-now-reliably-perform-a-working-payment-action-if-the-upi-deep-link-scheme-upi-pay-cannot-be-opened-on-the-user-s-current-device-browser-provide-an-in-page-fallback-that-still-lets-the-user-complete-payment-e-g-show-the-upi-id-9622655116-ybl-prominently-with-one-tap-copy-and-clear-instructions",
+      "title": "Make both primary CTA buttons (desktop “GET INSTANT ACCESS 🚀” and mobile sticky “CLAIM PRO FOR ₹399 NOW”) reliably perform a working payment action. If the UPI deep link scheme (upi://pay?...) cannot be opened on the user’s current device/browser, provide an in-page fallback that still lets the user complete payment (e.g., show the UPI ID 9622655116@ybl prominently with one-tap copy and clear instructions).",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-dedicated-section-to-the-landing-page-that-mentions-all-pro-features-by-listing-a-comprehensive-set-of-canva-pro-features-in-english-clear-bullets-or-a-grid-the-list-should-cover-the-major-pro-capabilities-e-g-premium-templates-assets-background-remover-magic-resize-brand-kit-content-planner-team-collaboration-features-export-formats-storage-etc-without-removing-the-existing-what-techify-unlocks-for-you-feature-cards",
+      "title": "Add a dedicated section to the landing page that “mentions all pro features” by listing a comprehensive set of Canva Pro features in English (clear bullets or a grid). The list should cover the major Pro capabilities (e.g., premium templates/assets, background remover, Magic Resize, Brand Kit, content planner, team collaboration features, export formats, storage, etc.) without removing the existing “What Techify Unlocks For You” feature cards.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-upi-id-copy-to-clipboard-action-so-that-tapping-the-copy-button-in-the-upi-payment-fallback-dialog-reliably-copies-the-upi-id-9622655116-ybl-across-common-browsers-devices-including-cases-where-navigator-clipboard-writetext-is-unavailable-or-blocked",
+      "title": "Fix the UPI ID copy-to-clipboard action so that tapping the \"Copy\" button in the UPI payment fallback dialog reliably copies the UPI ID (9622655116@ybl) across common browsers/devices, including cases where `navigator.clipboard.writeText` is unavailable or blocked.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-improve-the-fallback-dialog-ux-so-users-can-still-complete-copying-even-if-the-button-fails-by-making-the-upi-id-itself-easily-selectable-and-offering-an-additional-tap-to-copy-interaction-on-the-upi-id-row-while-keeping-all-user-facing-text-in-english",
+      "title": "Improve the fallback dialog UX so users can still complete copying even if the button fails by making the UPI ID itself easily selectable and offering an additional tap-to-copy interaction on the UPI ID row, while keeping all user-facing text in English.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-correct-the-hero-headline-so-the-offer-text-e-g-399-only-year-is-visibly-rendered-as-text-not-an-empty-solid-gradient-bar-while-keeping-the-existing-english-copy-structure-unlock-canva-pro-subscription-for-on-the-first-line-and-the-offer-period-on-the-second-line",
+      "title": "Correct the hero headline so the offer text (e.g., \"₹399 Only /Year\") is visibly rendered as text (not an empty/solid gradient bar) while keeping the existing English copy structure: \"Unlock Canva Pro subscription for\" on the first line and the offer/period on the second line.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-live-purchases-ui-section-on-the-landing-page-that-shows-a-real-time-updating-purchased-count-and-a-small-list-of-the-most-recent-purchase-events-fetched-from-the-backend-no-static-fake-numbers-use-english-for-all-user-facing-text-and-include-a-short-disclaimer-that-the-count-reflects-on-site-purchase-actions-not-bank-verified-payment",
+      "title": "Add a “Live purchases” UI section on the landing page that shows a real-time updating purchased count and a small list of the most recent purchase events fetched from the backend (no static/fake numbers). Use English for all user-facing text and include a short disclaimer that the count reflects on-site purchase actions (not bank-verified payment).",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-record-purchase-activity-events-from-the-frontend-when-users-take-payment-intent-actions-e-g-clicking-either-primary-cta-and-or-clicking-send-payment-screenshot-so-the-live-purchases-feed-updates-as-users-interact",
+      "title": "Record purchase activity events from the frontend when users take payment-intent actions (e.g., clicking either primary CTA and/or clicking “Send Payment Screenshot”), so the live purchases feed updates as users interact.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-current-backend-driven-live-purchases-section-with-a-fully-simulated-fake-purchases-counter-and-recent-activity-feed-generated-on-the-frontend-without-fetching-or-writing-any-purchase-events-to-the-backend",
+      "title": "Replace the current backend-driven “Live Purchases” section with a fully simulated (fake) purchases counter and recent activity feed generated on the frontend, without fetching or writing any purchase events to the backend.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-live-purchases-section-user-facing-text-to-avoid-claiming-real-time-backend-activity-and-remove-or-rewrite-any-disclaimer-text-that-references-platform-recorded-purchase-intent-events-or-backend-verification",
+      "title": "Update the “Live Purchases” section user-facing text to avoid claiming “real-time” backend activity, and remove or rewrite any disclaimer text that references platform-recorded purchase-intent events or backend verification.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-stop-recording-purchase-events-to-the-backend-from-payment-intent-actions-ctas-and-the-whatsapp-screenshot-action-so-simulated-live-purchases-is-not-affected-by-user-actions-and-does-not-require-backend-availability",
+      "title": "Stop recording purchase events to the backend from payment-intent actions (CTAs and the WhatsApp screenshot action) so simulated Live Purchases is not affected by user actions and does not require backend availability.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-change-the-hero-scarcity-badge-text-to-start-at-last-30-slots-available-and-make-the-number-dynamically-decrease-in-sync-with-the-simulated-fake-purchase-activity-i-e-as-the-simulated-purchase-count-increases-the-remaining-slots-decreases",
+      "title": "Change the hero scarcity badge text to start at “Last 30 slots available” and make the number dynamically decrease in sync with the simulated/fake purchase activity (i.e., as the simulated purchase count increases, the remaining slots decreases).",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-simulated-recent-activity-feed-so-it-shows-realistic-buyer-names-and-a-paid-action-e-g-riya-paid-abdul-paid-instead-of-the-current-generic-text-someone-purchased-names-must-come-from-the-simulated-activity-generator-client-only-and-be-displayed-per-event",
+      "title": "Update the simulated “Recent Activity” feed so it shows realistic buyer names and a paid action (e.g., “Riya paid”, “Abdul paid”) instead of the current generic text (“Someone purchased”). Names must come from the simulated activity generator (client-only) and be displayed per event.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-when-the-user-clicks-the-send-screenshot-button-or-equivalent-whatsapp-screenshot-payment-confirmation-action-redirect-open-whatsapp-chat-with-the-support-number-919622655116-and-a-prefilled-english-message-stating-the-user-has-paid-for-canva-pro-e-g-i-have-paid-for-canva-pro",
+      "title": "When the user clicks the “Send screenshot” button (or equivalent WhatsApp screenshot/payment confirmation action), redirect/open WhatsApp chat with the support number (+919622655116) and a prefilled English message stating the user has paid for Canva Pro (e.g., “I have paid for Canva Pro”).",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -68,6 +192,42 @@
     {
       "id": "AR-3",
       "summary": "Add UPI ID (9622655116@ybl) and connect/replace the payment CTA link(s) with a real payment option (UPI/payment link)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Update landing page offer copy to mention \"Unlock Canva Pro subscription for 399 only / year\" and add scarcity note \"Last 10 slots available\" above the offer",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Add a section or bullet list mentioning all Canva Pro features (\"all pro features\") on the landing page",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Change the “Live purchases” section to display simulated/fake purchase activity (non-real-time, no backend) for marketing purposes",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Update scarcity badge to start at “Last 30 slots available” and decrement the slots count in sync with the simulated/fake purchase activity counter",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Enhance simulated “Live purchases” feed to show realistic buyer names (e.g., “Riya paid”, “Abdul paid”) instead of generic/anonymous paid entries",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Update WhatsApp “Send screenshot” / payment flow to open WhatsApp with a prefilled message like “I paid for Canva Pro” / “I have paid” (redirect to user’s WhatsApp chat with that message)",
       "reqIds": [],
       "status": "pending"
     }

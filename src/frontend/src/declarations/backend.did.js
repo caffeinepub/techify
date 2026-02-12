@@ -8,10 +8,36 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
-export const idlService = IDL.Service({});
+export const Time = IDL.Int;
+export const MappingInfo = IDL.Record({
+  'timestamp' : Time,
+  'swapId' : IDL.Text,
+  'walletId' : IDL.Text,
+});
+
+export const idlService = IDL.Service({
+  'addMappingInfo' : IDL.Func([IDL.Text, IDL.Text], [], []),
+  'deleteMappingInfoByTimeRange' : IDL.Func([Time, Time], [], []),
+  'getAllMappingInfo' : IDL.Func([], [IDL.Vec(MappingInfo)], ['query']),
+  'getFirstMappingInfo' : IDL.Func([], [IDL.Opt(MappingInfo)], ['query']),
+});
 
 export const idlInitArgs = [];
 
-export const idlFactory = ({ IDL }) => { return IDL.Service({}); };
+export const idlFactory = ({ IDL }) => {
+  const Time = IDL.Int;
+  const MappingInfo = IDL.Record({
+    'timestamp' : Time,
+    'swapId' : IDL.Text,
+    'walletId' : IDL.Text,
+  });
+  
+  return IDL.Service({
+    'addMappingInfo' : IDL.Func([IDL.Text, IDL.Text], [], []),
+    'deleteMappingInfoByTimeRange' : IDL.Func([Time, Time], [], []),
+    'getAllMappingInfo' : IDL.Func([], [IDL.Vec(MappingInfo)], ['query']),
+    'getFirstMappingInfo' : IDL.Func([], [IDL.Opt(MappingInfo)], ['query']),
+  });
+};
 
 export const init = ({ IDL }) => { return []; };

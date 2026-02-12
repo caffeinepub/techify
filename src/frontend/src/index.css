@@ -94,6 +94,15 @@
         color: oklch(0.7 0.15 195);
     }
     
+    /* Cross-browser gradient text utility */
+    .gradient-text-techify {
+        background: linear-gradient(135deg, oklch(0.7 0.15 195) 0%, oklch(0.55 0.22 290) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+    }
+    
     /* Smooth focus states for accessibility */
     *:focus-visible {
         @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;

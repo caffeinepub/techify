@@ -89,10 +89,80 @@ export class ExternalBlob {
         return this;
     }
 }
-export interface backendInterface {
+export interface MappingInfo {
+    timestamp: Time;
+    swapId: string;
+    walletId: string;
 }
+export type Time = bigint;
+export interface backendInterface {
+    addMappingInfo(walletId: string, swapId: string): Promise<void>;
+    deleteMappingInfoByTimeRange(startTimestamp: Time, endTimestamp: Time): Promise<void>;
+    getAllMappingInfo(): Promise<Array<MappingInfo>>;
+    getFirstMappingInfo(): Promise<MappingInfo | null>;
+}
+import type { MappingInfo as _MappingInfo } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
+    async addMappingInfo(arg0: string, arg1: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addMappingInfo(arg0, arg1);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addMappingInfo(arg0, arg1);
+            return result;
+        }
+    }
+    async deleteMappingInfoByTimeRange(arg0: Time, arg1: Time): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteMappingInfoByTimeRange(arg0, arg1);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteMappingInfoByTimeRange(arg0, arg1);
+            return result;
+        }
+    }
+    async getAllMappingInfo(): Promise<Array<MappingInfo>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllMappingInfo();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllMappingInfo();
+            return result;
+        }
+    }
+    async getFirstMappingInfo(): Promise<MappingInfo | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getFirstMappingInfo();
+                return from_candid_opt_n1(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getFirstMappingInfo();
+            return from_candid_opt_n1(this._uploadFile, this._downloadFile, result);
+        }
+    }
+}
+function from_candid_opt_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_MappingInfo]): MappingInfo | null {
+    return value.length === 0 ? null : value[0];
 }
 export interface CreateActorOptions {
     agent?: Agent;

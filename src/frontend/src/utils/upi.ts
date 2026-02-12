@@ -32,3 +32,14 @@ export function generateWhatsAppLink(): string {
     
     return `https://wa.me/${e164}?text=${encodedMessage}`;
 }
+
+/**
+ * Generates WhatsApp link for payment confirmation with screenshot
+ */
+export function generateWhatsAppPaymentLink(): string {
+    const { e164 } = TECHIFY_CONSTANTS.phone;
+    const { paymentConfirmationMessage } = TECHIFY_CONSTANTS.whatsapp;
+    const encodedMessage = encodeURIComponent(paymentConfirmationMessage);
+    
+    return `https://wa.me/${e164}?text=${encodedMessage}`;
+}

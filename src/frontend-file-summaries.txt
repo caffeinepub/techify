@@ -1,10 +1,15 @@
 {
-  "frontend/src/App.tsx": "Main application entry point that renders the Techify landing page as the default view with no routing or authentication.",
-  "frontend/src/constants/techify.ts": "Centralized constants for contact details (phone number 9622655116), UPI payment ID (9622655116@ybl), WhatsApp messaging, and pricing information.",
-  "frontend/src/utils/upi.ts": "Utility functions to generate UPI payment deep links and WhatsApp support links with proper formatting and encoding.",
-  "frontend/src/pages/TechifyLandingPage.tsx": "Complete single-page landing component featuring hero section with pricing card, trust band, features grid, FAQ accordion, mobile sticky CTA, and footer with contact details.",
-  "frontend/src/index.css": "Global styles with OKLCH color system, Techify brand gradient utilities (.bg-techify, .text-techify), and Inter font family configuration.",
+  "frontend/src/App.tsx": "Main application entry point that wraps the Techify landing page with QueryClientProvider for React Query state management.",
+  "frontend/src/constants/techify.ts": "Centralized constants for contact details, UPI payment information, pricing, WhatsApp messaging (including new payment confirmation message), and comprehensive Canva Pro features array.",
+  "frontend/src/utils/upi.ts": "Utility functions to generate UPI payment deep links, WhatsApp support links, and new WhatsApp payment confirmation links with proper formatting and encoding.",
+  "frontend/src/pages/TechifyLandingPage.tsx": "Complete single-page landing component with dynamic scarcity badge (starts at 30 slots, decreases with simulated purchases), named purchase activity feed (shows \"Riya paid\", \"Abdul paid\", etc.), WhatsApp payment confirmation flow, pricing card, trust band, live purchases section, feature cards, comprehensive Canva Pro features, FAQ accordion, mobile sticky CTA, enhanced payment fallback dialog, and footer.",
+  "frontend/src/index.css": "Global styles with OKLCH color system, Techify brand gradient utilities (.bg-techify, .text-techify), cross-browser gradient text utility (.gradient-text-techify with -webkit prefixes), and Inter font family configuration.",
   "frontend/tailwind.config.js": "Tailwind configuration extended with Inter font family in sans-serif stack and consistent design tokens.",
   "frontend/DEPLOYMENT.md": "Deployment documentation with step-by-step instructions for building and deploying the Techify landing page to the Internet Computer.",
-  "frontend/src/hooks/useQueries.ts": "Placeholder file for React Query hooks (intentionally minimal as this is a static landing page with no backend data operations)."
+  "frontend/src/hooks/useQueries.ts": "Intentionally minimal placeholder file as the Techify landing page uses feature-specific hooks (useLivePurchases, useRecordPurchaseEvent) for backend interactions.",
+  "frontend/src/hooks/useUpiPayment.ts": "Custom React hook managing UPI payment flow with automatic fallback detection and robust clipboard copy functionality that reports success/failure states and error messages to the UI.",
+  "frontend/src/utils/clipboard.ts": "Robust clipboard utility that attempts modern Clipboard API first, falls back to legacy execCommand method, and returns success/failure results without throwing console errors.",
+  "frontend/src/hooks/useLivePurchases.ts": "React Query hook that fetches live purchase activity from the backend with 5-second polling, transforms MappingInfo records into display-friendly purchase events with relative timestamps, and returns total count plus recent activity list.",
+  "frontend/src/hooks/useRecordPurchaseEvent.ts": "React Query mutation hook that records purchase-intent events to the backend with fail-soft behavior, never blocking the UI if recording fails, and invalidates the live purchases query on success.",
+  "frontend/src/hooks/useSimulatedLivePurchases.ts": "Client-side hook that generates simulated live purchase activity with realistic buyer names (Riya, Abdul, etc.), tracks total purchases and increments since mount for scarcity calculation, and automatically ages timestamps without any backend calls."
 }

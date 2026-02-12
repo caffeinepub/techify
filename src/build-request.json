@@ -1,108 +1,73 @@
 {
   "kind": "build_request",
-  "title": "Techify Canva Pro Upgrade Landing Page (Go-live + Phone & UPI)",
+  "title": "Sync scarcity badge with simulated purchases, add named “paid” activity, and prefill WhatsApp message on screenshot action",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-1",
-      "text": "Recreate the provided single-page Techify landing page as the app’s main React (TypeScript) page, matching the layout/sections and Tailwind styling from the supplied HTML (navbar, hero/pricing card with CTA, trusted-by band, features grid, FAQ section, mobile sticky CTA, footer).",
+      "id": "REQ-19",
+      "text": "Change the hero scarcity badge text to start at “Last 30 slots available” and make the number dynamically decrease in sync with the simulated/fake purchase activity (i.e., as the simulated purchase count increases, the remaining slots decreases).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-6"
         ],
         "quotes": [
-          "make this live and add phone number 9622655116 \nupi id 9622655116@ybl\n\n<!DOCTYPE html> ..."
+          "instead of showing last 10 slots available it should show Last 30 slots available and that should decrease as per increase in fake purchase activity"
         ]
       },
       "acceptanceCriteria": [
-        "Visually matches the provided HTML page structure and styling using Tailwind classes in React components.",
-        "All sections from the provided HTML exist on the rendered page and are responsive (mobile + desktop).",
-        "No external Tailwind CDN script is required at runtime; styling is handled via the project’s Tailwind build setup."
+        "On initial page load, the badge renders “Last 30 slots available”.",
+        "As the simulated live purchases total increases, the badge’s slots number decreases accordingly (remaining = 30 - simulated increments, clamped at 0).",
+        "The slots value does not increase over time.",
+        "All badge text remains in English."
       ]
     },
     {
-      "id": "REQ-2",
-      "text": "Update contact details across the page to use phone number 9622655116, including: (1) the WhatsApp Support link (wa.me) to message the correct number, and (2) at least one visible place on the page (e.g., footer and/or a contact/support area) showing the phone number with a clickable tel: link.",
+      "id": "REQ-20",
+      "text": "Update the simulated “Recent Activity” feed so it shows realistic buyer names and a paid action (e.g., “Riya paid”, “Abdul paid”) instead of the current generic text (“Someone purchased”). Names must come from the simulated activity generator (client-only) and be displayed per event.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-6"
         ],
         "quotes": [
-          "add phone number 9622655116"
+          "intead of showing paid someone it should show some name like riya paid, abdul paid like that"
         ]
       },
       "acceptanceCriteria": [
-        "WhatsApp Support button/link points to a wa.me URL using phone number 9622655116 (with appropriate country code formatting).",
-        "Phone number 9622655116 is visibly displayed on the page and clicking it initiates a call via a tel: link on supported devices.",
-        "No remaining placeholder phone numbers (e.g., 919999999999) appear in the UI or links."
+        "Recent activity rows display a name and the word “paid” (e.g., “Riya paid”).",
+        "No recent activity row displays “Someone purchased”.",
+        "Simulated activity remains fully client-side (no backend reads/writes introduced).",
+        "All user-facing text remains in English."
       ]
     },
     {
-      "id": "REQ-3",
-      "text": "Add UPI ID 9622655116@ybl to the page and connect both CTA buttons (desktop “GET INSTANT ACCESS” and mobile bottom CTA) to a working UPI payment action by replacing the placeholder href \"YOUR_PAYMENT_LINK\" with a UPI payment deep link derived from the provided UPI ID.",
+      "id": "REQ-21",
+      "text": "When the user clicks the “Send screenshot” button (or equivalent WhatsApp screenshot/payment confirmation action), redirect/open WhatsApp chat with the support number (+919622655116) and a prefilled English message stating the user has paid for Canva Pro (e.g., “I have paid for Canva Pro”).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-6"
         ],
         "quotes": [
-          "upi id 9622655116@ybl",
-          "<a href=\"YOUR_PAYMENT_LINK\" class=\"block w-full ...\">"
+          "once user should click on send screenshot button it should show i paid for canva pro or after payment it should redirect to my whatsapp page with i have paid"
         ]
       },
       "acceptanceCriteria": [
-        "UPI ID 9622655116@ybl is visible on the page (e.g., near pricing/CTA) as selectable/copyable text.",
-        "Both CTAs no longer use \"YOUR_PAYMENT_LINK\" and instead open a UPI payment deep link that includes pa=9622655116@ybl.",
-        "No occurrences of the placeholder \"YOUR_PAYMENT_LINK\" remain in the codebase/UI."
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "text": "Make the app production-ready for go-live by ensuring it builds successfully and is configured as a single-page public landing page (no login required), including a short, English deployment note in the project documentation describing how to deploy to the Internet Computer with the project’s standard workflow.",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "make this live"
-        ]
-      },
-      "acceptanceCriteria": [
-        "A production build completes without errors.",
-        "The deployed app loads directly to the landing page as the default route.",
-        "Project includes brief English instructions describing the steps to deploy/go-live on the Internet Computer (using the project’s standard tooling)."
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "text": "Apply a coherent, modern visual theme consistent with the provided design (tech/marketing aesthetic) and enforce consistent typography, spacing, and button styles across the page while keeping all user-facing text in English.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Use English for any user-facing text in the build request."
-        ]
-      },
-      "acceptanceCriteria": [
-        "Typography and spacing are consistent across all sections (headings, body text, cards, and CTAs).",
-        "Buttons/links have consistent hover/focus styles and accessible contrast.",
-        "All user-visible text is English."
+        "Clicking the “Send screenshot” action opens a https://wa.me/ link to +919622655116 with a prefilled message indicating payment for Canva Pro.",
+        "The prefilled message is in English and clearly communicates payment (e.g., “I have paid for Canva Pro”).",
+        "This change does not break the existing general WhatsApp “Support” link behavior."
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui (compose them instead if needed).",
-    "Backend must remain a single Motoko actor (no additional backend services)."
+    "Frontend immutable paths must not be edited: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
+    "Do not add backend dependencies for simulated purchases; keep the activity and slots decrement logic fully client-side."
   ],
   "nonGoals": [
-    "Implementing third-party authentication providers (only Internet Identity is supported).",
-    "Integrating external payment gateways (e.g., Stripe) beyond linking to the provided UPI ID.",
-    "Building an admin panel, order management, email delivery automation, or real-time chat/support."
+    "Do not implement bank/payment verification.",
+    "Do not change the UPI deep link generation logic or pricing amounts beyond what is required for the WhatsApp prefilled message behavior.",
+    "Do not add any new authentication requirements or gated access."
   ],
   "imageRequirements": {
     "required": [],
