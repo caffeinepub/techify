@@ -1,0 +1,74 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-12T17:32:09.177Z",
+  "summary": "The diff adds a new TechifyLandingPage React page with Tailwind styling utilities, centralized constants for phone/UPI, and helper functions for UPI + WhatsApp links, plus a DEPLOYMENT.md. Some acceptance criteria cannot be fully verified due to truncation, and the WhatsApp wa.me link formatting appears incorrect (includes a leading '+').",
+  "missing_requirements": [
+    {
+      "id": "REQ-2",
+      "requirement": "WhatsApp Support link must point to a wa.me URL using phone number 9622655116 with appropriate country code formatting (digits-only path).",
+      "reason": "The generated WhatsApp URL uses an E.164 string with a leading '+' (\"+919622655116\"), producing `https://wa.me/+919622655116?...`, but wa.me expects the phone number path segment to contain only digits (no '+').",
+      "evidence": [
+        "frontend/src/constants/techify.ts",
+        "frontend/src/utils/upi.ts"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "requirement": "Phone number 9622655116 is visibly displayed on the page with a clickable tel: link.",
+      "reason": "The landing page file is truncated; the provided diff excerpt does not show any visible phone number text or a `tel:` anchor in the rendered JSX, so this cannot be confirmed from the diff summary evidence.",
+      "evidence": [
+        "frontend/src/pages/TechifyLandingPage.tsx (truncated)"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "requirement": "UPI ID 9622655116@ybl is visible on the page as selectable/copyable text.",
+      "reason": "Although the UPI ID is defined in constants and used to generate a UPI deep link, the landing page JSX is truncated and does not show the UPI ID being rendered as visible text anywhere.",
+      "evidence": [
+        "frontend/src/constants/techify.ts",
+        "frontend/src/pages/TechifyLandingPage.tsx (truncated)"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "requirement": "Both CTA buttons (desktop “GET INSTANT ACCESS” and mobile bottom CTA) must open the UPI deep link and no occurrences of placeholder \"YOUR_PAYMENT_LINK\" remain.",
+      "reason": "A UPI deep link generator exists, but the CTA button/link implementations are not visible in the truncated landing page file, so it cannot be verified that both CTAs use the generated link or that \"YOUR_PAYMENT_LINK\" is removed everywhere.",
+      "evidence": [
+        "frontend/src/utils/upi.ts",
+        "frontend/src/pages/TechifyLandingPage.tsx (truncated)"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Added/implemented Internet Identity + React Query actor plumbing (useActor/useInternetIdentity/main.tsx wrapping) despite the landing page being described as a static marketing page with no login required.",
+      "reason": "The BuildRequest focuses on a public single-page landing page and explicitly says no login required; adding identity context + actor/query invalidation logic is not requested as part of the landing page requirements.",
+      "evidence": [
+        "frontend/src/hooks/useActor.ts",
+        "frontend/src/hooks/useInternetIdentity.ts (truncated)",
+        "frontend/src/main.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.62,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/DEPLOYMENT.md",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/constants/techify.ts",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/TechifyLandingPage.tsx",
+    "frontend/src/utils/upi.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

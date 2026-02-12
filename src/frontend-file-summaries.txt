@@ -1,0 +1,10 @@
+{
+  "frontend/src/App.tsx": "Main application entry point that renders the Techify landing page as the default view with no routing or authentication.",
+  "frontend/src/constants/techify.ts": "Centralized constants for contact details (phone number 9622655116), UPI payment ID (9622655116@ybl), WhatsApp messaging, and pricing information.",
+  "frontend/src/utils/upi.ts": "Utility functions to generate UPI payment deep links and WhatsApp support links with proper formatting and encoding.",
+  "frontend/src/pages/TechifyLandingPage.tsx": "Complete single-page landing component featuring hero section with pricing card, trust band, features grid, FAQ accordion, mobile sticky CTA, and footer with contact details.",
+  "frontend/src/index.css": "Global styles with OKLCH color system, Techify brand gradient utilities (.bg-techify, .text-techify), and Inter font family configuration.",
+  "frontend/tailwind.config.js": "Tailwind configuration extended with Inter font family in sans-serif stack and consistent design tokens.",
+  "frontend/DEPLOYMENT.md": "Deployment documentation with step-by-step instructions for building and deploying the Techify landing page to the Internet Computer.",
+  "frontend/src/hooks/useQueries.ts": "Placeholder file for React Query hooks (intentionally minimal as this is a static landing page with no backend data operations)."
+}

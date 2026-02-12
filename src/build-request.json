@@ -1,0 +1,111 @@
+{
+  "kind": "build_request",
+  "title": "Techify Canva Pro Upgrade Landing Page (Go-live + Phone & UPI)",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Recreate the provided single-page Techify landing page as the app’s main React (TypeScript) page, matching the layout/sections and Tailwind styling from the supplied HTML (navbar, hero/pricing card with CTA, trusted-by band, features grid, FAQ section, mobile sticky CTA, footer).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "make this live and add phone number 9622655116 \nupi id 9622655116@ybl\n\n<!DOCTYPE html> ..."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Visually matches the provided HTML page structure and styling using Tailwind classes in React components.",
+        "All sections from the provided HTML exist on the rendered page and are responsive (mobile + desktop).",
+        "No external Tailwind CDN script is required at runtime; styling is handled via the project’s Tailwind build setup."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Update contact details across the page to use phone number 9622655116, including: (1) the WhatsApp Support link (wa.me) to message the correct number, and (2) at least one visible place on the page (e.g., footer and/or a contact/support area) showing the phone number with a clickable tel: link.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "add phone number 9622655116"
+        ]
+      },
+      "acceptanceCriteria": [
+        "WhatsApp Support button/link points to a wa.me URL using phone number 9622655116 (with appropriate country code formatting).",
+        "Phone number 9622655116 is visibly displayed on the page and clicking it initiates a call via a tel: link on supported devices.",
+        "No remaining placeholder phone numbers (e.g., 919999999999) appear in the UI or links."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Add UPI ID 9622655116@ybl to the page and connect both CTA buttons (desktop “GET INSTANT ACCESS” and mobile bottom CTA) to a working UPI payment action by replacing the placeholder href \"YOUR_PAYMENT_LINK\" with a UPI payment deep link derived from the provided UPI ID.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "upi id 9622655116@ybl",
+          "<a href=\"YOUR_PAYMENT_LINK\" class=\"block w-full ...\">"
+        ]
+      },
+      "acceptanceCriteria": [
+        "UPI ID 9622655116@ybl is visible on the page (e.g., near pricing/CTA) as selectable/copyable text.",
+        "Both CTAs no longer use \"YOUR_PAYMENT_LINK\" and instead open a UPI payment deep link that includes pa=9622655116@ybl.",
+        "No occurrences of the placeholder \"YOUR_PAYMENT_LINK\" remain in the codebase/UI."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Make the app production-ready for go-live by ensuring it builds successfully and is configured as a single-page public landing page (no login required), including a short, English deployment note in the project documentation describing how to deploy to the Internet Computer with the project’s standard workflow.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "make this live"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A production build completes without errors.",
+        "The deployed app loads directly to the landing page as the default route.",
+        "Project includes brief English instructions describing the steps to deploy/go-live on the Internet Computer (using the project’s standard tooling)."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Apply a coherent, modern visual theme consistent with the provided design (tech/marketing aesthetic) and enforce consistent typography, spacing, and button styles across the page while keeping all user-facing text in English.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Use English for any user-facing text in the build request."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Typography and spacing are consistent across all sections (headings, body text, cards, and CTAs).",
+        "Buttons/links have consistent hover/focus styles and accessible contrast.",
+        "All user-visible text is English."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not edit files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui (compose them instead if needed).",
+    "Backend must remain a single Motoko actor (no additional backend services)."
+  ],
+  "nonGoals": [
+    "Implementing third-party authentication providers (only Internet Identity is supported).",
+    "Integrating external payment gateways (e.g., Stripe) beyond linking to the provided UPI ID.",
+    "Building an admin panel, order management, email delivery automation, or real-time chat/support."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

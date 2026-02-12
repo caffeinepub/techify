@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Build and deploy a Techify marketing landing page for a Canva Pro upgrade offer, including contact details and payment/UPI information.",
+  "architectural_notes": [
+    "Static single-page marketing site built with TailwindCSS via CDN and Font Awesome via CDN."
+  ],
+  "known_issues": [
+    "Payment CTA uses placeholder href \"YOUR_PAYMENT_LINK\" and must be replaced with a real payment/UPI link.",
+    "WhatsApp support link currently uses a placeholder number (919999999999) and likely needs updating to the real support contact."
+  ],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-recreate-the-provided-single-page-techify-landing-page-as-the-app-s-main-react-typescript-page-matching-the-layout-sections-and-tailwind-styling-from-the-supplied-html-navbar-hero-pricing-card-with-cta-trusted-by-band-features-grid-faq-section-mobile-sticky-cta-footer",
+      "title": "Recreate the provided single-page Techify landing page as the app’s main React (TypeScript) page, matching the layout/sections and Tailwind styling from the supplied HTML (navbar, hero/pricing card with CTA, trusted-by band, features grid, FAQ section, mobile sticky CTA, footer).",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-contact-details-across-the-page-to-use-phone-number-9622655116-including-1-the-whatsapp-support-link-wa-me-to-message-the-correct-number-and-2-at-least-one-visible-place-on-the-page-e-g-footer-and-or-a-contact-support-area-showing-the-phone-number-with-a-clickable-tel-link",
+      "title": "Update contact details across the page to use phone number 9622655116, including: (1) the WhatsApp Support link (wa.me) to message the correct number, and (2) at least one visible place on the page (e.g., footer and/or a contact/support area) showing the phone number with a clickable tel: link.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-upi-id-9622655116-ybl-to-the-page-and-connect-both-cta-buttons-desktop-get-instant-access-and-mobile-bottom-cta-to-a-working-upi-payment-action-by-replacing-the-placeholder-href-your-payment-link-with-a-upi-payment-deep-link-derived-from-the-provided-upi-id",
+      "title": "Add UPI ID 9622655116@ybl to the page and connect both CTA buttons (desktop “GET INSTANT ACCESS” and mobile bottom CTA) to a working UPI payment action by replacing the placeholder href \"YOUR_PAYMENT_LINK\" with a UPI payment deep link derived from the provided UPI ID.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-app-production-ready-for-go-live-by-ensuring-it-builds-successfully-and-is-configured-as-a-single-page-public-landing-page-no-login-required-including-a-short-english-deployment-note-in-the-project-documentation-describing-how-to-deploy-to-the-internet-computer-with-the-project-s-standard-workflow",
+      "title": "Make the app production-ready for go-live by ensuring it builds successfully and is configured as a single-page public landing page (no login required), including a short, English deployment note in the project documentation describing how to deploy to the Internet Computer with the project’s standard workflow.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-coherent-modern-visual-theme-consistent-with-the-provided-design-tech-marketing-aesthetic-and-enforce-consistent-typography-spacing-and-button-styles-across-the-page-while-keeping-all-user-facing-text-in-english",
+      "title": "Apply a coherent, modern visual theme consistent with the provided design (tech/marketing aesthetic) and enforce consistent typography, spacing, and button styles across the page while keeping all user-facing text in English.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Deploy the provided HTML landing page to a live public URL (hosting setup/go-live)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Add/replace site contact phone number (9622655116) in appropriate page locations (e.g., support/contact/footer)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Add UPI ID (9622655116@ybl) and connect/replace the payment CTA link(s) with a real payment option (UPI/payment link)",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Techify",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
