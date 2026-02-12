@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 17,
+  "projectStateVersion": 23,
   "summary": "Build and deploy a Techify marketing landing page for a Canva Pro upgrade offer, including contact details and payment/UPI information.",
   "architectural_notes": [
     "Static single-page marketing site built with TailwindCSS via CDN and Font Awesome via CDN.",
@@ -174,6 +174,86 @@
         "REQ-21"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-hero-headline-and-subheadline-copy-in-frontend-src-pages-techifylandingpage-tsx-to-exactly-match-the-requested-high-converting-text-headline-techify-india-s-best-canva-pro-reseller-canva-pro-premium-399-1-year-subheadline-instant-activation-premium-tools-safe-trusted-keep-the-displayed-price-consistent-with-techify-constants-pricing-offer-399-and-the-duration-consistent-with-the-existing-offer-period-1-year-while-rendering-the-headline-exactly-as-above-for-users",
+      "title": "Update the hero headline and subheadline copy in `frontend/src/pages/TechifyLandingPage.tsx` to exactly match the requested high-converting text:\n- Headline: “Techify — India’s Best Canva Pro Reseller | Canva Pro Premium ₹399 (1 Year)”\n- Subheadline: “Instant Activation • Premium Tools • Safe & Trusted”\nKeep the displayed price consistent with `TECHIFY_CONSTANTS.pricing.offer` (₹399) and the duration consistent with the existing offer period (1 year), while rendering the headline exactly as above for users.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-social-proof-block-directly-below-the-hero-headline-subheadline-in-frontend-src-pages-techifylandingpage-tsx-containing-a-star-rating-line-showing-the-text-rated-4-9-5-by-5000-creators-a-small-set-of-customer-quote-testimonials-short-1-2-line-quotes-displayed-as-readable-quote-cards-or-a-simple-list",
+      "title": "Add a social-proof block directly below the hero headline/subheadline in `frontend/src/pages/TechifyLandingPage.tsx`, containing:\n- A star rating line showing “★★★★★”\n- The text: “Rated 4.9/5 by 5000+ Creators”\n- A small set of customer quote testimonials (short, 1–2 line quotes) displayed as readable quote cards or a simple list.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-benefit-bullets-section-in-the-hero-area-or-immediately-after-it-in-frontend-src-pages-techifylandingpage-tsx-that-highlights-key-benefits-users-get-using-benefit-driven-bullet-copy-and-clear-iconography-and-ensuring-a-visually-persuasive-flow-from-headline-benefits-social-proof-cta",
+      "title": "Add a benefit-bullets section in the hero area (or immediately after it) in `frontend/src/pages/TechifyLandingPage.tsx` that highlights key benefits users get, using benefit-driven bullet copy and clear iconography, and ensuring a visually persuasive flow from headline → benefits → social proof → CTA.",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-primary-hero-cta-area-to-include-two-strong-cta-buttons-with-the-exact-labels-unlock-canva-pro-399-get-premium-access-now-both-ctas-must-trigger-the-existing-payment-action-the-useupipayment-initiatepayment-flow-so-behavior-remains-consistent-with-the-current-upi-deep-link-fallback-dialog-approach",
+      "title": "Update primary hero CTA area to include two strong CTA buttons with the exact labels:\n- “Unlock Canva Pro ₹399”\n- “Get Premium Access Now”\nBoth CTAs must trigger the existing payment action (the `useUpiPayment(...).initiatePayment` flow) so behavior remains consistent with the current UPI deep-link + fallback dialog approach.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-urgency-and-trust-elements-near-the-hero-cta-area-in-frontend-src-pages-techifylandingpage-tsx-urgency-text-displayed-exactly-limited-offer-price-may-increase-soon-trust-badges-displayed-as-a-small-badge-row-or-cards-with-the-exact-labels-secure-delivery-24-7-support-instant-activation",
+      "title": "Add urgency and trust elements near the hero CTA area in `frontend/src/pages/TechifyLandingPage.tsx`:\n- Urgency text displayed exactly: “Limited Offer — Price May Increase Soon”\n- Trust badges displayed as a small badge row or cards with the exact labels: “Secure Delivery”, “24/7 Support”, “Instant Activation”",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-revise-expand-the-existing-faq-section-in-frontend-src-pages-techifylandingpage-tsx-to-ensure-it-clearly-addresses-common-questions-consistent-with-the-updated-landing-page-positioning-and-flow-activation-speed-safety-trust-existing-account-compatibility-one-time-payment-1-year-coverage-keep-all-faq-user-facing-text-in-english",
+      "title": "Revise/expand the existing FAQ section in `frontend/src/pages/TechifyLandingPage.tsx` to ensure it clearly addresses common questions consistent with the updated landing-page positioning and flow (activation speed, safety/trust, existing account compatibility, one-time payment/1-year coverage). Keep all FAQ user-facing text in English.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-simple-form-or-direct-purchase-ui-element-in-frontend-src-pages-techifylandingpage-tsx-to-support-the-requested-simple-form-or-direct-purchase-button-requirement-without-adding-a-backend-implementation-should-be-purely-frontend-and-can-be-either-a-minimal-form-e-g-name-email-whatsapp-with-a-submit-action-that-opens-whatsapp-support-with-a-prefilled-english-message-including-the-entered-details-or-a-clearly-labeled-direct-purchase-button-that-triggers-the-existing-payment-flow-do-not-remove-the-existing-upi-fallback-dialog-payment-instructions",
+      "title": "Add a simple form or direct purchase UI element in `frontend/src/pages/TechifyLandingPage.tsx` to support the requested “simple form or direct purchase button” requirement without adding a backend.\nImplementation should be purely frontend and can be either:\n- A minimal form (e.g., name + email/WhatsApp) with a submit action that opens WhatsApp support with a prefilled English message including the entered details, OR\n- A clearly labeled direct purchase button that triggers the existing payment flow.\nDo not remove the existing UPI fallback dialog/payment instructions.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-existing-hero-area-customer-testimonials-block-in-frontend-src-pages-techifylandingpage-tsx-to-show-only-2-3-reviews-and-for-each-review-render-a-small-circular-profile-image-avatar-beside-the-review-text-along-with-a-realistic-customer-name",
+      "title": "Update the existing hero-area customer testimonials block in `frontend/src/pages/TechifyLandingPage.tsx` to show only 2–3 reviews, and for each review render a small circular profile image (avatar) beside the review text along with a realistic customer name.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-2-3-realistic-looking-avatar-images-as-static-assets-under-frontend-public-assets-generated-and-reference-them-from-the-testimonials-reviews-ui-so-the-avatars-render-reliably-without-any-backend-dependency",
+      "title": "Add 2–3 realistic-looking avatar images as static assets under `frontend/public/assets/generated/` and reference them from the testimonials/reviews UI so the avatars render reliably without any backend dependency.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-persistent-bottom-buying-cta-that-stays-continuously-visible-at-the-bottom-of-the-viewport-while-the-user-scrolls-the-landing-page-and-ensure-it-triggers-the-existing-upi-payment-flow-implement-this-as-a-sticky-fixed-bottom-bar-rendered-on-the-landing-page-frontend-src-pages-techifylandingpage-tsx-the-bottom-cta-must-call-the-existing-initiatepayment-function-from-useupipayment-same-behavior-as-the-hero-cta-buttons-including-deep-link-fallback-dialog-ensure-the-bottom-bar-is-visible-across-common-screen-sizes-mobile-and-desktop-and-does-not-obscure-important-content-add-appropriate-bottom-padding-margin-to-the-page-content-so-the-last-sections-remain-readable-and-tappable-keep-all-user-facing-text-in-english",
+      "title": "Add a persistent bottom “buying” CTA that stays continuously visible at the bottom of the viewport while the user scrolls the landing page, and ensure it triggers the existing UPI payment flow.\n\n- Implement this as a sticky/fixed bottom bar rendered on the landing page (`frontend/src/pages/TechifyLandingPage.tsx`).\n- The bottom CTA must call the existing `initiatePayment` function from `useUpiPayment(...)` (same behavior as the hero CTA buttons, including deep-link + fallback dialog).\n- Ensure the bottom bar is visible across common screen sizes (mobile and desktop) and does not obscure important content (add appropriate bottom padding/margin to the page content so the last sections remain readable and tappable).\n- Keep all user-facing text in English.",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -228,6 +308,24 @@
     {
       "id": "AR-11",
       "summary": "Update WhatsApp “Send screenshot” / payment flow to open WhatsApp with a prefilled message like “I paid for Canva Pro” / “I have paid” (redirect to user’s WhatsApp chat with that message)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Update landing page copy/structure to new high-converting flow: new headline/subheadline, social proof (★★★★★ + 4.9/5 by 5000+ creators + testimonials), benefit bullets, updated CTA button labels, urgency text, trust badges, FAQ, and simple form/direct purchase button",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Add 2–3 realistic-looking customer review items with customer names and small circular profile images (avatars) beside the reviews for increased trust/social proof",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Ensure a buy/purchase CTA button is continuously visible below (persistent bottom CTA/sticky buying button across the page)",
       "reqIds": [],
       "status": "pending"
     }

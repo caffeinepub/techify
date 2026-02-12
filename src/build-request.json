@@ -1,73 +1,36 @@
 {
   "kind": "build_request",
-  "title": "Sync scarcity badge with simulated purchases, add named “paid” activity, and prefill WhatsApp message on screenshot action",
+  "title": "Add continuously visible bottom buying button (persistent CTA)",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-19",
-      "text": "Change the hero scarcity badge text to start at “Last 30 slots available” and make the number dynamically decrease in sync with the simulated/fake purchase activity (i.e., as the simulated purchase count increases, the remaining slots decreases).",
+      "id": "REQ-31",
+      "text": "Add a persistent bottom “buying” CTA that stays continuously visible at the bottom of the viewport while the user scrolls the landing page, and ensure it triggers the existing UPI payment flow.\n\n- Implement this as a sticky/fixed bottom bar rendered on the landing page (`frontend/src/pages/TechifyLandingPage.tsx`).\n- The bottom CTA must call the existing `initiatePayment` function from `useUpiPayment(...)` (same behavior as the hero CTA buttons, including deep-link + fallback dialog).\n- Ensure the bottom bar is visible across common screen sizes (mobile and desktop) and does not obscure important content (add appropriate bottom padding/margin to the page content so the last sections remain readable and tappable).\n- Keep all user-facing text in English.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-user-1"
         ],
         "quotes": [
-          "instead of showing last 10 slots available it should show Last 30 slots available and that should decrease as per increase in fake purchase activity"
+          "it should show buying button below continously"
         ]
       },
       "acceptanceCriteria": [
-        "On initial page load, the badge renders “Last 30 slots available”.",
-        "As the simulated live purchases total increases, the badge’s slots number decreases accordingly (remaining = 30 - simulated increments, clamped at 0).",
-        "The slots value does not increase over time.",
-        "All badge text remains in English."
-      ]
-    },
-    {
-      "id": "REQ-20",
-      "text": "Update the simulated “Recent Activity” feed so it shows realistic buyer names and a paid action (e.g., “Riya paid”, “Abdul paid”) instead of the current generic text (“Someone purchased”). Names must come from the simulated activity generator (client-only) and be displayed per event.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-6"
-        ],
-        "quotes": [
-          "intead of showing paid someone it should show some name like riya paid, abdul paid like that"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Recent activity rows display a name and the word “paid” (e.g., “Riya paid”).",
-        "No recent activity row displays “Someone purchased”.",
-        "Simulated activity remains fully client-side (no backend reads/writes introduced).",
-        "All user-facing text remains in English."
-      ]
-    },
-    {
-      "id": "REQ-21",
-      "text": "When the user clicks the “Send screenshot” button (or equivalent WhatsApp screenshot/payment confirmation action), redirect/open WhatsApp chat with the support number (+919622655116) and a prefilled English message stating the user has paid for Canva Pro (e.g., “I have paid for Canva Pro”).",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-6"
-        ],
-        "quotes": [
-          "once user should click on send screenshot button it should show i paid for canva pro or after payment it should redirect to my whatsapp page with i have paid"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Clicking the “Send screenshot” action opens a https://wa.me/ link to +919622655116 with a prefilled message indicating payment for Canva Pro.",
-        "The prefilled message is in English and clearly communicates payment (e.g., “I have paid for Canva Pro”).",
-        "This change does not break the existing general WhatsApp “Support” link behavior."
+        "When scrolling anywhere on the landing page, a bottom “buy” CTA remains visible at the bottom of the screen.",
+        "Clicking/tapping the bottom CTA triggers the same payment behavior as the existing hero CTAs (calls `initiatePayment` from `useUpiPayment(...)` and shows the existing fallback dialog when needed).",
+        "On both mobile and desktop viewports, the persistent bottom bar does not cover/obstruct the page’s content; the user can still access the footer and last section content without it being hidden behind the bar.",
+        "All text shown in the bottom CTA/bar is in English."
       ]
     }
   ],
   "constraints": [
-    "Frontend immutable paths must not be edited: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
-    "Do not add backend dependencies for simulated purchases; keep the activity and slots decrement logic fully client-side."
+    "Do not edit files under the immutable frontend paths listed in SYSTEM_CONTEXT (compose existing UI components instead).",
+    "Keep the existing UPI deep-link + fallback dialog approach; do not introduce new payment providers or backend dependencies."
   ],
   "nonGoals": [
-    "Do not implement bank/payment verification.",
-    "Do not change the UPI deep link generation logic or pricing amounts beyond what is required for the WhatsApp prefilled message behavior.",
-    "Do not add any new authentication requirements or gated access."
+    "Changing backend canister logic or adding backend purchase tracking.",
+    "Adding new routing/pages beyond the existing single-page landing page.",
+    "Changing the existing hero CTA labels or WhatsApp flows unless required to wire the persistent CTA to the same payment behavior."
   ],
   "imageRequirements": {
     "required": [],

@@ -1,75 +1,32 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Sync scarcity badge with simulated activity, show named “paid” events, and prefill WhatsApp message for screenshot action",
+  "title": "Persistent bottom buy CTA wired to existing UPI flow",
   "requirements": [
     {
-      "id": "REQ-19",
-      "summary": "Make the hero scarcity badge start at “Last 30 slots available” and dynamically decrement based on simulated purchase increments (client-side only).",
+      "id": "REQ-31",
+      "summary": "Add a sticky/fixed bottom buy bar on the landing page that stays visible while scrolling and triggers the existing UPI payment flow without obscuring content.",
       "acceptanceCriteria": [
-        "On initial page load, the badge renders “Last 30 slots available”.",
-        "As the simulated live purchases total increases, the badge’s slots number decreases accordingly (remaining = 30 - simulated increments, clamped at 0).",
-        "The slots value does not increase over time.",
-        "All badge text remains in English."
+        "When scrolling anywhere on the landing page, a bottom “buy” CTA remains visible at the bottom of the screen.",
+        "Clicking/tapping the bottom CTA triggers the same payment behavior as the existing hero CTAs (calls `initiatePayment` from `useUpiPayment(...)` and shows the existing fallback dialog when needed).",
+        "On both mobile and desktop viewports, the persistent bottom bar does not cover/obstruct the page’s content; the user can still access the footer and last section content without it being hidden behind the bar.",
+        "All text shown in the bottom CTA/bar is in English."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/hooks/useSimulatedLivePurchases.ts",
-          "operation": "modify",
-          "description": "Extend the client-only simulated purchases hook to track the initial total on mount and expose a monotonic simulated increment count (e.g., totalDeltaSinceMount) that can drive the “remaining slots” calculation without introducing any backend calls."
+          "path": "frontend/src/components/PersistentBottomCtaBar.tsx",
+          "operation": "create",
+          "description": "Create a reusable persistent bottom CTA bar component rendered as a fixed/sticky bottom container with an English “Buy/Unlock” call-to-action. Use the shadcn-ui Button component to keep styling consistent and support accessible interaction. Verify the component's usage instructions before implementing."
         },
         {
           "path": "frontend/src/pages/TechifyLandingPage.tsx",
           "operation": "modify",
-          "description": "Update the hero scarcity badge to display “Last 30 slots available” on first render and compute remaining slots from the simulated increment count (clamp at 0). Keep all user-facing text in English. Continue using existing shadcn-ui UI primitives already imported on this page (e.g., Button/Dialog/Accordion); verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-20",
-      "summary": "Update the simulated Recent Activity feed to show realistic buyer names with a “paid” action per event (client-only).",
-      "acceptanceCriteria": [
-        "Recent activity rows display a name and the word “paid” (e.g., “Riya paid”).",
-        "No recent activity row displays “Someone purchased”.",
-        "Simulated activity remains fully client-side (no backend reads/writes introduced).",
-        "All user-facing text remains in English."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/hooks/useSimulatedLivePurchases.ts",
-          "operation": "modify",
-          "description": "Enhance the simulated activity generator so each recent event includes a realistic buyer name and an explicit “paid” action label. Ensure both the initial seeded recent activity and the periodic additions include names, and keep all strings in English."
+          "description": "Render the new PersistentBottomCtaBar on the landing page and wire its onClick to the existing `initiatePayment` returned by `useUpiPayment(upiPaymentLink)` (matching hero CTA behavior, including existing deep-link + fallback dialog). Add appropriate bottom spacing to the landing page content so the final sections/footer remain visible and tappable above the fixed bar across mobile and desktop. Ensure all new visible strings in the bar are in English."
         },
         {
-          "path": "frontend/src/pages/TechifyLandingPage.tsx",
+          "path": "frontend/src/index.css",
           "operation": "modify",
-          "description": "Replace the hardcoded “Someone purchased” label in Recent Activity rows with the per-event generated buyer name plus the word “paid” (e.g., “Riya paid”). Continue using existing shadcn-ui UI primitives already imported on this page; verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-21",
-      "summary": "On “Send screenshot” action, open WhatsApp to the support number with a prefilled English payment confirmation message, without breaking the existing Support link.",
-      "acceptanceCriteria": [
-        "Clicking the “Send screenshot” action opens a https://wa.me/ link to +919622655116 with a prefilled message indicating payment for Canva Pro.",
-        "The prefilled message is in English and clearly communicates payment (e.g., “I have paid for Canva Pro”).",
-        "This change does not break the existing general WhatsApp “Support” link behavior."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/constants/techify.ts",
-          "operation": "modify",
-          "description": "Add a dedicated WhatsApp message constant for the payment screenshot flow (English), distinct from the existing default support message, to avoid changing current Support link behavior."
-        },
-        {
-          "path": "frontend/src/utils/upi.ts",
-          "operation": "modify",
-          "description": "Add a separate WhatsApp link generator for the “Send screenshot” flow that targets TECHIFY_CONSTANTS.phone.e164 (+919622655116) and uses the new prefilled payment-confirmation message, while keeping generateWhatsAppLink() behavior unchanged."
-        },
-        {
-          "path": "frontend/src/pages/TechifyLandingPage.tsx",
-          "operation": "modify",
-          "description": "Wire the existing “Send screenshot” (or equivalent payment confirmation) UI action to use the new WhatsApp paid-message link (https://wa.me/... with encoded text). Ensure the top navigation Support button continues to use the existing generateWhatsAppLink() behavior. Continue using existing shadcn-ui UI primitives already imported on this page; verify the component's usage instructions before implementing."
+          "description": "Add a small global utility (or CSS variable) to support safe bottom spacing for fixed bottom UI (including mobile safe-area inset) so the landing page can add reliable bottom padding/margin that prevents the persistent bar from covering the last content."
         }
       ]
     }

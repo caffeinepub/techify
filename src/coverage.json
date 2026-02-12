@@ -1,54 +1,28 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-12T18:39:11.220Z",
+  "generatedAt": "2026-02-12T19:30:46.336Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 3,
+    "total": 1,
+    "implemented": 1,
     "items": [
       {
-        "id": "REQ-19",
-        "summary": "Change the hero scarcity badge text to start at “Last 30 slots available” and make the number dynamically decrease in sync with the simulated/fake purchase activity (i.e., as the simulated purchase count increases, the remaining slots decreases).",
+        "id": "REQ-31",
+        "summary": "Add a persistent bottom “buying” CTA that stays continuously visible at the bottom of the viewport while the user scrolls the landing page, and ensure it triggers the existing UPI payment flow.\n\n- Implement this as a sticky/fixed bottom bar rendered on the landing page (`frontend/src/pages/TechifyLandingPage.tsx`).\n- The bottom CTA must call the existing `initiatePayment` function from `useUpiPayment(...)` (same behavior as the hero CTA buttons, including deep-link + fallback dialog).\n- Ensure the bottom bar is visible across common screen sizes (mobile and desktop) and does not obscure important content (add appropriate bottom padding/margin to the page content so the last sections remain readable and tappable).\n- Keep all user-facing text in English.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/hooks/useSimulatedLivePurchases.ts",
-          "frontend/src/pages/TechifyLandingPage.tsx"
+          "frontend/src/components/PersistentBottomCtaBar.tsx",
+          "frontend/src/pages/TechifyLandingPage.tsx",
+          "frontend/src/index.css"
         ],
         "matchedFiles": [
-          "frontend/src/hooks/useSimulatedLivePurchases.ts",
-          "frontend/src/pages/TechifyLandingPage.tsx"
-        ]
-      },
-      {
-        "id": "REQ-20",
-        "summary": "Update the simulated “Recent Activity” feed so it shows realistic buyer names and a paid action (e.g., “Riya paid”, “Abdul paid”) instead of the current generic text (“Someone purchased”). Names must come from the simulated activity generator (client-only) and be displayed per event.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/hooks/useSimulatedLivePurchases.ts",
-          "frontend/src/pages/TechifyLandingPage.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/hooks/useSimulatedLivePurchases.ts",
-          "frontend/src/pages/TechifyLandingPage.tsx"
-        ]
-      },
-      {
-        "id": "REQ-21",
-        "summary": "When the user clicks the “Send screenshot” button (or equivalent WhatsApp screenshot/payment confirmation action), redirect/open WhatsApp chat with the support number (+919622655116) and a prefilled English message stating the user has paid for Canva Pro (e.g., “I have paid for Canva Pro”).",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/constants/techify.ts",
-          "frontend/src/utils/upi.ts",
-          "frontend/src/pages/TechifyLandingPage.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/constants/techify.ts",
-          "frontend/src/utils/upi.ts",
-          "frontend/src/pages/TechifyLandingPage.tsx"
+          "frontend/src/components/PersistentBottomCtaBar.tsx",
+          "frontend/src/pages/TechifyLandingPage.tsx",
+          "frontend/src/index.css"
         ]
       }
     ]
@@ -58,10 +32,9 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/constants/techify.ts",
-    "frontend/src/hooks/useSimulatedLivePurchases.ts",
+    "frontend/src/components/PersistentBottomCtaBar.tsx",
+    "frontend/src/index.css",
     "frontend/src/pages/TechifyLandingPage.tsx",
-    "frontend/src/utils/upi.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

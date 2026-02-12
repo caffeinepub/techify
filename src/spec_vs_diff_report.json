@@ -1,45 +1,43 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-12T18:39:11.217Z",
-  "summary": "REQ-19 appears implemented via a client-side simulated purchases delta driving a hero badge that starts at 30 and monotonically decreases (clamped at 0). REQ-20 and REQ-21 cannot be fully verified from the provided truncated diff because the actual Recent Activity row text (including “paid” and removal of “Someone purchased”) and the “Send screenshot” button wiring to the new WhatsApp payment-confirmation link are not shown in the excerpted component code.",
+  "generatedAt": "2026-02-12T19:30:46.333Z",
+  "summary": "A new fixed bottom CTA bar component and safe-area/bottom-padding utilities were added, and the landing page now imports the component and applies bottom padding. However, the provided diff excerpt does not clearly show the bar being rendered on the landing page nor that its click handler is wired to `initiatePayment` from `useUpiPayment(...)`.",
   "missing_requirements": [
     {
-      "id": "REQ-20",
-      "requirement": "Recent Activity feed rows must display realistic buyer names from the simulated activity generator and include the word “paid” (e.g., “Riya paid”), with no rows showing “Someone purchased”.",
-      "reason": "The simulated hook now generates names, but the diff does not show the UI rendering of the Recent Activity feed text (including the required literal word “paid”) nor proof that “Someone purchased” is removed; the TechifyLandingPage.tsx content is truncated before the activity feed section.",
+      "id": "REQ-31",
+      "requirement": "Render a sticky/fixed persistent bottom “buying” CTA bar on `frontend/src/pages/TechifyLandingPage.tsx` that remains visible while scrolling.",
+      "reason": "`TechifyLandingPage.tsx` imports `PersistentBottomCtaBar`, but the truncated diff does not show it being included in the returned JSX.",
       "evidence": [
-        "frontend/src/hooks/useSimulatedLivePurchases.ts",
-        "frontend/src/pages/TechifyLandingPage.tsx (truncated)"
+        "frontend/src/pages/TechifyLandingPage.tsx (truncated)",
+        "frontend/src/components/PersistentBottomCtaBar.tsx"
       ]
     },
     {
-      "id": "REQ-21",
-      "requirement": "Clicking the “Send screenshot” action must open a wa.me link to +919622655116 with a prefilled English payment-confirmation message (e.g., “I have paid for Canva Pro”) without breaking the existing Support WhatsApp link.",
-      "reason": "A new payment-confirmation message constant and a generateWhatsAppPaymentLink() helper are added, and TechifyLandingPage.tsx defines whatsappPaymentLink, but the diff excerpt does not show the “Send screenshot” button (or equivalent) using this link, so the click behavior cannot be verified.",
+      "id": "REQ-31",
+      "requirement": "Bottom CTA must trigger the existing UPI flow by calling `initiatePayment` from `useUpiPayment(...)` (including deep-link + fallback dialog behavior).",
+      "reason": "`initiatePayment` is obtained from `useUpiPayment(upiPaymentLink)`, and the bottom bar exposes `onBuyClick`, but the diff snippet does not show `onBuyClick={initiatePayment}` (or equivalent) being passed when rendering the bar.",
       "evidence": [
-        "frontend/src/constants/techify.ts",
-        "frontend/src/utils/upi.ts",
-        "frontend/src/pages/TechifyLandingPage.tsx (truncated)"
+        "frontend/src/pages/TechifyLandingPage.tsx (truncated)",
+        "frontend/src/components/PersistentBottomCtaBar.tsx"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Expanded/added a large “Comprehensive Canva Pro Features” list in TECHIFY_CONSTANTS.",
-      "reason": "Not requested by REQ-19/20/21; appears to be additional landing-page content beyond the specified changes.",
+      "description": "Persistent bottom CTA bar includes specific offer copy (“Canva Pro — ₹399/Year”, “Instant activation • Premium tools”, “Buy Now”) and an icon (Sparkles).",
+      "reason": "REQ-31 requires a persistent buy CTA in English and wiring to existing payment flow, but does not specify the exact marketing text/iconography.",
       "evidence": [
-        "frontend/src/constants/techify.ts"
+        "frontend/src/components/PersistentBottomCtaBar.tsx"
       ]
     }
   ],
-  "confidence": 0.58,
+  "confidence": 0.62,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/src/constants/techify.ts",
-    "frontend/src/hooks/useSimulatedLivePurchases.ts",
+    "frontend/src/components/PersistentBottomCtaBar.tsx",
+    "frontend/src/index.css",
     "frontend/src/pages/TechifyLandingPage.tsx",
-    "frontend/src/utils/upi.ts",
     "project_state.json"
   ]
 }

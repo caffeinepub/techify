@@ -1,11 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Sync the hero scarcity badge with the client-side simulated purchase activity, show named “paid” events in Recent Activity, and prefill a WhatsApp message when the user sends a screenshot.
+**Goal:** Add a persistent bottom “buy” CTA on the landing page that stays visible while scrolling and triggers the existing UPI payment flow.
 
 **Planned changes:**
-- Update the hero scarcity badge to start at “Last 30 slots available” and decrease as simulated purchase events accumulate (remaining = 30 - simulated count, clamped at 0).
-- Update the simulated “Recent Activity” feed entries to use realistic buyer names and the text format “{Name} paid” (replacing any “Someone purchased” messaging), fully client-side.
-- Change the “Send screenshot” action to open WhatsApp chat to +919622655116 using a wa.me link with a prefilled English message indicating payment for Canva Pro (e.g., “I have paid for Canva Pro”), without breaking the existing general WhatsApp support link.
+- Add a sticky/fixed bottom CTA bar on `frontend/src/pages/TechifyLandingPage.tsx` that remains visible at the bottom of the viewport during scroll.
+- Wire the bottom CTA to call the existing `initiatePayment` function from `useUpiPayment(...)`, matching the current hero CTA behavior (including deep-link + existing fallback dialog).
+- Add appropriate bottom spacing to the landing page content so the persistent bar does not obscure the last sections/footer on mobile or desktop.
+- Ensure all user-facing text in the bottom bar is in English.
 
-**User-visible outcome:** Users see a scarcity badge that counts down from 30 in sync with the on-page simulated purchases, a Recent Activity feed that shows named “paid” entries, and clicking “Send screenshot” opens WhatsApp to the support number with a prefilled payment-confirmation message.
+**User-visible outcome:** Users will always see a bottom “buy” button while scrolling the landing page, and tapping it will start the same UPI payment flow as the existing hero CTAs without blocking access to the page’s bottom content.

@@ -1,45 +1,42 @@
 import { TECHIFY_CONSTANTS } from '../constants/techify';
 
 /**
- * Generates a UPI payment deep link for the Techify Canva Pro offer.
- * The link follows the UPI URI scheme and will open UPI-enabled apps on mobile devices.
+ * Generates a UPI payment deep link for mobile payment apps
  */
 export function generateUpiPaymentLink(): string {
-    const { id, payeeName } = TECHIFY_CONSTANTS.upi;
-    const amount = '399';
-    const currency = 'INR';
-    const transactionNote = 'Canva Pro - 1 Year';
-    
-    // UPI deep link format: upi://pay?pa=<UPI_ID>&pn=<PAYEE_NAME>&am=<AMOUNT>&cu=<CURRENCY>&tn=<NOTE>
-    const params = new URLSearchParams({
-        pa: id,
-        pn: payeeName,
-        am: amount,
-        cu: currency,
-        tn: transactionNote
-    });
-    
-    return `upi://pay?${params.toString()}`;
+  const { id, payeeName } = TECHIFY_CONSTANTS.upi;
+  const { offer } = TECHIFY_CONSTANTS.pricing;
+  const amount = offer.replace('₹', '');
+  const note = encodeURIComponent('Canva Pro 1 Year Subscription');
+
+  return `upi://pay?pa=${id}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR&tn=${note}`;
 }
 
 /**
- * Generates WhatsApp support link with pre-filled message
+ * Generates a WhatsApp support link with pre-filled message
  */
 export function generateWhatsAppLink(): string {
-    const { e164 } = TECHIFY_CONSTANTS.phone;
-    const { defaultMessage } = TECHIFY_CONSTANTS.whatsapp;
-    const encodedMessage = encodeURIComponent(defaultMessage);
-    
-    return `https://wa.me/${e164}?text=${encodedMessage}`;
+  const { e164 } = TECHIFY_CONSTANTS.phone;
+  const message = encodeURIComponent(TECHIFY_CONSTANTS.whatsapp.defaultMessage);
+  return `https://wa.me/${e164}?text=${message}`;
 }
 
 /**
- * Generates WhatsApp link for payment confirmation with screenshot
+ * Generates a WhatsApp link for payment confirmation with pre-filled message
  */
 export function generateWhatsAppPaymentLink(): string {
-    const { e164 } = TECHIFY_CONSTANTS.phone;
-    const { paymentConfirmationMessage } = TECHIFY_CONSTANTS.whatsapp;
-    const encodedMessage = encodeURIComponent(paymentConfirmationMessage);
-    
-    return `https://wa.me/${e164}?text=${encodedMessage}`;
+  const { e164 } = TECHIFY_CONSTANTS.phone;
+  const message = encodeURIComponent(TECHIFY_CONSTANTS.whatsapp.paymentConfirmationMessage);
+  return `https://wa.me/${e164}?text=${message}`;
+}
+
+/**
+ * Generates a WhatsApp link for form submission with user details
+ */
+export function generateWhatsAppFormLink(name: string, contact: string): string {
+  const { e164 } = TECHIFY_CONSTANTS.phone;
+  const message = encodeURIComponent(
+    `Hi, I want to purchase Canva Pro!\n\nName: ${name}\nContact: ${contact}\n\nPlease guide me with the payment process.`
+  );
+  return `https://wa.me/${e164}?text=${message}`;
 }
