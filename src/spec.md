@@ -1,12 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Add a persistent bottom “buy” CTA on the landing page that stays visible while scrolling and triggers the existing UPI payment flow.
+**Goal:** Integrate Razorpay payment button, update pricing to ₹299, restructure layout with reviews below features, and enhance overall design to professional standards.
 
 **Planned changes:**
-- Add a sticky/fixed bottom CTA bar on `frontend/src/pages/TechifyLandingPage.tsx` that remains visible at the bottom of the viewport during scroll.
-- Wire the bottom CTA to call the existing `initiatePayment` function from `useUpiPayment(...)`, matching the current hero CTA behavior (including deep-link + existing fallback dialog).
-- Add appropriate bottom spacing to the landing page content so the persistent bar does not obscure the last sections/footer on mobile or desktop.
-- Ensure all user-facing text in the bottom bar is in English.
+- Replace UPI payment flow with Razorpay payment button (payment_button_id: pl_SIrXp6zPDOixDu)
+- Update all pricing displays from current price to ₹299 throughout the site
+- Move testimonials/reviews section below the features section
+- Enhance website design with improved typography hierarchy, consistent spacing, refined color palette, professional shadows/borders, and polished interactions
 
-**User-visible outcome:** Users will always see a bottom “buy” button while scrolling the landing page, and tapping it will start the same UPI payment flow as the existing hero CTAs without blocking access to the page’s bottom content.
+**User-visible outcome:** Users will see a professionally designed website with Razorpay payment integration, ₹299 pricing, and a logical content flow with reviews positioned after features.

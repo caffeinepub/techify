@@ -1,32 +1,106 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Persistent bottom buy CTA wired to existing UPI flow",
+  "title": "Integrate Razorpay payment button and restructure website layout",
   "requirements": [
     {
-      "id": "REQ-31",
-      "summary": "Add a sticky/fixed bottom buy bar on the landing page that stays visible while scrolling and triggers the existing UPI payment flow without obscuring content.",
+      "id": "REQ-1",
+      "summary": "Replace UPI payment flow with Razorpay payment button integration",
       "acceptanceCriteria": [
-        "When scrolling anywhere on the landing page, a bottom “buy” CTA remains visible at the bottom of the screen.",
-        "Clicking/tapping the bottom CTA triggers the same payment behavior as the existing hero CTAs (calls `initiatePayment` from `useUpiPayment(...)` and shows the existing fallback dialog when needed).",
-        "On both mobile and desktop viewports, the persistent bottom bar does not cover/obstruct the page’s content; the user can still access the footer and last section content without it being hidden behind the bar.",
-        "All text shown in the bottom CTA/bar is in English."
+        "Razorpay payment button script is loaded asynchronously",
+        "Payment button renders with the correct payment_button_id",
+        "Previous UPI payment logic is replaced with Razorpay integration",
+        "Payment button is visually integrated into the existing CTA sections"
       ],
       "file_operations": [
         {
+          "path": "frontend/src/pages/TechifyLandingPage.tsx",
+          "operation": "modify",
+          "description": "Replace the UPI payment button and modal with Razorpay payment button form. Remove the useUpiPayment hook usage and related state. Add the Razorpay script tag with data-payment_button_id='pl_SIrXp6zPDOixDu' inside a form element. Ensure the script loads asynchronously and is properly integrated into the CTA sections where the Buy Now button currently appears."
+        },
+        {
           "path": "frontend/src/components/PersistentBottomCtaBar.tsx",
-          "operation": "create",
-          "description": "Create a reusable persistent bottom CTA bar component rendered as a fixed/sticky bottom container with an English “Buy/Unlock” call-to-action. Use the shadcn-ui Button component to keep styling consistent and support accessible interaction. Verify the component's usage instructions before implementing."
+          "operation": "modify",
+          "description": "Replace the Buy Now button handler with Razorpay payment button integration. Add the Razorpay script form element to render the payment button in the bottom CTA bar instead of triggering the UPI modal."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Update all pricing displays to ₹299 throughout the website",
+      "acceptanceCriteria": [
+        "All instances of the offer price display ₹299",
+        "The TECHIFY_CONSTANTS.pricing.offerPrice is updated to 299",
+        "The PersistentBottomCtaBar shows ₹299",
+        "Any strikethrough or original pricing remains consistent with the new offer price"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/constants/techify.ts",
+          "operation": "modify",
+          "description": "Update TECHIFY_CONSTANTS.pricing.offerPrice from its current value to 299. Ensure any related pricing constants (original price, strikethrough price) are adjusted to maintain consistency with the new offer price."
         },
         {
           "path": "frontend/src/pages/TechifyLandingPage.tsx",
           "operation": "modify",
-          "description": "Render the new PersistentBottomCtaBar on the landing page and wire its onClick to the existing `initiatePayment` returned by `useUpiPayment(upiPaymentLink)` (matching hero CTA behavior, including existing deep-link + fallback dialog). Add appropriate bottom spacing to the landing page content so the final sections/footer remain visible and tappable above the fixed bar across mobile and desktop. Ensure all new visible strings in the bar are in English."
+          "description": "Update all hardcoded price displays in the hero section, pricing cards, and any other sections to reflect ₹299. Ensure the price is consistently formatted across all instances."
         },
+        {
+          "path": "frontend/src/components/PersistentBottomCtaBar.tsx",
+          "operation": "modify",
+          "description": "Verify the bottom CTA bar displays ₹299 from the updated constant. Ensure the price formatting is consistent with the rest of the site."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Restructure landing page to move testimonials section below features",
+      "acceptanceCriteria": [
+        "Testimonials section appears after the features section",
+        "Content flow follows: Hero → Features → Testimonials → CTA",
+        "Visual hierarchy is maintained with proper spacing",
+        "Mobile responsiveness is preserved in the new layout"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/TechifyLandingPage.tsx",
+          "operation": "modify",
+          "description": "Reorder the JSX sections in the landing page so that the testimonials/reviews section is rendered after the features section. Ensure the content hierarchy follows: Hero section → Features section → Testimonials section → CTA sections. Maintain proper spacing between sections and verify mobile responsiveness is preserved."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Enhance overall website design to professional standards with improved typography, spacing, colors, and interactions",
+      "acceptanceCriteria": [
+        "Typography uses a clear hierarchy with consistent font sizes and weights",
+        "Spacing follows a consistent scale (e.g., 8px base unit)",
+        "Color palette uses professional, harmonious colors with proper contrast",
+        "UI elements have refined shadows, borders, and hover states",
+        "Overall design feels polished and trustworthy",
+        "Layout uses proper white space and breathing room",
+        "All sections have cohesive visual treatment"
+      ],
+      "file_operations": [
         {
           "path": "frontend/src/index.css",
           "operation": "modify",
-          "description": "Add a small global utility (or CSS variable) to support safe bottom spacing for fixed bottom UI (including mobile safe-area inset) so the landing page can add reliable bottom padding/margin that prevents the persistent bar from covering the last content."
+          "description": "Enhance the global CSS with professional typography hierarchy using refined font-size scale, consistent spacing utilities based on 8px base unit, and improved base styles for headings, paragraphs, and interactive elements. Add professional utility classes for shadows, borders, and transitions."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Refine the Tailwind theme configuration with a professional color palette featuring harmonious colors with proper contrast ratios. Define consistent spacing scale, refined shadow utilities, professional border radius values, and enhanced animation timings for micro-interactions."
+        },
+        {
+          "path": "frontend/src/pages/TechifyLandingPage.tsx",
+          "operation": "modify",
+          "description": "Apply professional design enhancements throughout all sections: improve typography hierarchy with consistent heading sizes and weights, add refined spacing between sections and elements, enhance card designs with professional shadows and borders, add polished hover states and micro-interactions, ensure proper white space and breathing room in the layout, and create cohesive visual treatment across hero, features, testimonials, and CTA sections."
+        },
+        {
+          "path": "frontend/src/components/PersistentBottomCtaBar.tsx",
+          "operation": "modify",
+          "description": "Enhance the bottom CTA bar design with professional styling including refined shadows, improved typography, polished button hover states, and consistent spacing that aligns with the overall design system."
         }
       ]
     }

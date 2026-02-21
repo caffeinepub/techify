@@ -2,11 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-a-persistent-bottom-buying-cta-that-stays-continuously-visible-at-the-bottom-of-the-viewport-while-the-user-scrolls-the-landing-page-and-ensure-it-triggers-the-existing-upi-payment-flow-implement-this-as-a-sticky-fixed-bottom-bar-rendered-on-the-landing-page-frontend-src-pages-techifylandingpage-tsx-the-bottom-cta-must-call-the-existing-initiatepayment-function-from-useupipayment-same-behavior-as-the-hero-cta-buttons-including-deep-link-fallback-dialog-ensure-the-bottom-bar-is-visible-across-common-screen-sizes-mobile-and-desktop-and-does-not-obscure-important-content-add-appropriate-bottom-padding-margin-to-the-page-content-so-the-last-sections-remain-readable-and-tappable-keep-all-user-facing-text-in-english",
-      "featureTitle": "Add a persistent bottom “buying” CTA that stays continuously visible at the bottom of the viewport while the user scrolls the landing page, and ensure it triggers the existing UPI payment flow.\n\n- Implement this as a sticky/fixed bottom bar rendered on the landing page (`frontend/src/pages/TechifyLandingPage.tsx`).\n- The bottom CTA must call the existing `initiatePayment` function from `useUpiPayment(...)` (same behavior as the hero CTA buttons, including deep-link + fallback dialog).\n- Ensure the bottom bar is visible across common screen sizes (mobile and desktop) and does not obscure important content (add appropriate bottom padding/margin to the page content so the last sections remain readable and tappable).\n- Keep all user-facing text in English.",
+      "featureId": "feature-replace-the-existing-upi-payment-flow-with-the-razorpay-payment-button-using-the-script-tag-with-payment-button-id-pl-sirxp6zpdoixdu-from-https-checkout-razorpay-com-v1-payment-button-js",
+      "featureTitle": "Replace the existing UPI payment flow with the Razorpay payment button using the script tag with payment_button_id 'pl_SIrXp6zPDOixDu' from https://checkout.razorpay.com/v1/payment-button.js",
       "files": [
         "frontend/src/components/PersistentBottomCtaBar.tsx",
-        "frontend/src/index.css",
         "frontend/src/pages/TechifyLandingPage.tsx"
       ],
       "components": [
@@ -17,7 +16,66 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-31"
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-all-pricing-displays-from-the-current-price-to-299-throughout-the-website-including-the-hero-section-pricing-cards-bottom-cta-bar-and-constants-file",
+      "featureTitle": "Update all pricing displays from the current price to ₹299 throughout the website including the hero section, pricing cards, bottom CTA bar, and constants file",
+      "files": [
+        "frontend/src/components/PersistentBottomCtaBar.tsx",
+        "frontend/src/constants/techify.ts",
+        "frontend/src/pages/TechifyLandingPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-restructure-the-landing-page-layout-to-move-the-testimonials-reviews-section-below-the-main-content-and-features-section-ensuring-a-logical-information-hierarchy",
+      "featureTitle": "Restructure the landing page layout to move the testimonials/reviews section below the main content and features section, ensuring a logical information hierarchy",
+      "files": [
+        "frontend/src/pages/TechifyLandingPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-enhance-the-overall-website-design-to-professional-standards-with-improved-typography-hierarchy-consistent-spacing-system-refined-color-palette-professional-shadows-and-borders-and-polished-micro-interactions",
+      "featureTitle": "Enhance the overall website design to professional standards with improved typography hierarchy, consistent spacing system, refined color palette, professional shadows and borders, and polished micro-interactions",
+      "files": [
+        "frontend/src/components/PersistentBottomCtaBar.tsx",
+        "frontend/src/index.css",
+        "frontend/src/pages/TechifyLandingPage.tsx",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
       ],
       "confidence": "high"
     }

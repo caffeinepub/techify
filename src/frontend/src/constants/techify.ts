@@ -23,8 +23,14 @@ export const TECHIFY_CONSTANTS = {
     // Pricing
     pricing: {
         regular: '₹3,999',
-        offer: '₹399',
+        offer: '₹299',
+        offerPrice: 299,
         period: '/Year'
+    },
+
+    // Razorpay payment button ID
+    razorpay: {
+        paymentButtonId: 'pl_SIrXp6zPDOixDu'
     },
 
     // Comprehensive Canva Pro Features

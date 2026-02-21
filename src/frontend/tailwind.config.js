@@ -70,13 +70,34 @@ export default {
             borderRadius: {
                 lg: 'var(--radius)',
                 md: 'calc(var(--radius) - 2px)',
-                sm: 'calc(var(--radius) - 4px)'
+                sm: 'calc(var(--radius) - 4px)',
+                xl: 'calc(var(--radius) + 4px)',
+                '2xl': 'calc(var(--radius) + 8px)',
+                '3xl': 'calc(var(--radius) + 12px)'
             },
             boxShadow: {
-                xs: '0 1px 2px 0 rgba(0,0,0,0.05)'
+                xs: '0 1px 2px 0 rgba(0,0,0,0.05)',
+                soft: '0 2px 8px -2px rgba(0, 0, 0, 0.08), 0 4px 16px -4px rgba(0, 0, 0, 0.06)',
+                medium: '0 4px 16px -2px rgba(0, 0, 0, 0.1), 0 8px 24px -4px rgba(0, 0, 0, 0.08)',
+                strong: '0 8px 32px -4px rgba(0, 0, 0, 0.12), 0 16px 48px -8px rgba(0, 0, 0, 0.1)'
             },
             fontFamily: {
                 sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
+            },
+            spacing: {
+                '18': '4.5rem',
+                '88': '22rem',
+                '100': '25rem',
+                '112': '28rem',
+                '128': '32rem'
+            },
+            fontSize: {
+                '2xs': ['0.625rem', { lineHeight: '0.875rem' }],
+                '3xl': ['1.875rem', { lineHeight: '2.25rem', letterSpacing: '-0.02em' }],
+                '4xl': ['2.25rem', { lineHeight: '2.5rem', letterSpacing: '-0.02em' }],
+                '5xl': ['3rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+                '6xl': ['3.75rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+                '7xl': ['4.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }]
             },
             keyframes: {
                 'accordion-down': {

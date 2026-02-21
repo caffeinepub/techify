@@ -1,40 +1,85 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-12T19:30:46.336Z",
+  "generatedAt": "2026-02-21T16:42:29.936Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 1,
-    "implemented": 1,
+    "total": 4,
+    "implemented": 4,
     "items": [
       {
-        "id": "REQ-31",
-        "summary": "Add a persistent bottom “buying” CTA that stays continuously visible at the bottom of the viewport while the user scrolls the landing page, and ensure it triggers the existing UPI payment flow.\n\n- Implement this as a sticky/fixed bottom bar rendered on the landing page (`frontend/src/pages/TechifyLandingPage.tsx`).\n- The bottom CTA must call the existing `initiatePayment` function from `useUpiPayment(...)` (same behavior as the hero CTA buttons, including deep-link + fallback dialog).\n- Ensure the bottom bar is visible across common screen sizes (mobile and desktop) and does not obscure important content (add appropriate bottom padding/margin to the page content so the last sections remain readable and tappable).\n- Keep all user-facing text in English.",
+        "id": "REQ-1",
+        "summary": "Replace the existing UPI payment flow with the Razorpay payment button using the script tag with payment_button_id 'pl_SIrXp6zPDOixDu' from https://checkout.razorpay.com/v1/payment-button.js",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/PersistentBottomCtaBar.tsx",
           "frontend/src/pages/TechifyLandingPage.tsx",
-          "frontend/src/index.css"
+          "frontend/src/components/PersistentBottomCtaBar.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/PersistentBottomCtaBar.tsx",
           "frontend/src/pages/TechifyLandingPage.tsx",
-          "frontend/src/index.css"
+          "frontend/src/components/PersistentBottomCtaBar.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Update all pricing displays from the current price to ₹299 throughout the website including the hero section, pricing cards, bottom CTA bar, and constants file",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/constants/techify.ts",
+          "frontend/src/pages/TechifyLandingPage.tsx",
+          "frontend/src/components/PersistentBottomCtaBar.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/constants/techify.ts",
+          "frontend/src/pages/TechifyLandingPage.tsx",
+          "frontend/src/components/PersistentBottomCtaBar.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Restructure the landing page layout to move the testimonials/reviews section below the main content and features section, ensuring a logical information hierarchy",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/TechifyLandingPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/TechifyLandingPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Enhance the overall website design to professional standards with improved typography hierarchy, consistent spacing system, refined color palette, professional shadows and borders, and polished micro-interactions",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/pages/TechifyLandingPage.tsx",
+          "frontend/src/components/PersistentBottomCtaBar.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/pages/TechifyLandingPage.tsx",
+          "frontend/src/components/PersistentBottomCtaBar.tsx"
         ]
       }
     ]
   },
   "changedFiles": [
     "build-request.json",
+    "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
     "frontend/src/components/PersistentBottomCtaBar.tsx",
+    "frontend/src/config.ts",
+    "frontend/src/constants/techify.ts",
     "frontend/src/index.css",
     "frontend/src/pages/TechifyLandingPage.tsx",
+    "frontend/tailwind.config.js",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",
